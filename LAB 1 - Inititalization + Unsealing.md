@@ -75,7 +75,7 @@ Threshold               3
 vault status
 ```
 
-Example output:ww
+Example output:
 ```
 [itzuser@itz-977nt3-helper-1 ~]$ vault status
 Key                     Value

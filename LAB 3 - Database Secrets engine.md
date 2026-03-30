@@ -21,6 +21,7 @@ Connection details:
 1. To connect Vault with the DB run:
 ```bash
 vault write database/config/my-postgres \
+    allowed_roles="admin-role" \
     plugin_name="postgresql-database-plugin" \
     connection_url="postgresql://{{username}}:{{password}}@localhost:5432/postgres?sslmode=disable" \
     username="postgres" \

@@ -1,6 +1,11 @@
 ### Step 1: Login to VM
 ```bash
-ssh -p [SSH_Port] itzuser@[Remote_Host]
+ssh -p [SSH_Port] root@[Remote_Host]
+```
+
+Example command:
+```bash
+ssh -p 20001 root@cloud.swgsupport.cz
 ```
 
 ### Step 2: Vault status
@@ -12,7 +17,7 @@ vault status
 
 Example output:
 ```
-[itzuser@itz-977nt3-helper-1 ~]$ vault status
+[root@localhost ~]# vault status
 Key                     Value
 ---                     -----
 Seal Type               shamir
@@ -59,7 +64,7 @@ vault operator unseal
 ```
 Example output:
 ```
-[itzuser@itz-977nt3-helper-1 ~]$ vault operator unseal
+[root@localhost ~]# vault operator unseal
 Unseal Key (will be hidden): 
 Key                     Value
 ---                     -----
@@ -77,7 +82,7 @@ vault status
 
 Example output:
 ```
-[itzuser@itz-977nt3-helper-1 ~]$ vault status
+[root@localhost ~]# vault status
 Key                     Value
 ---                     -----
 Seal Type               shamir
@@ -123,7 +128,7 @@ ssh -L [Local_Port]:localhost:[Remote_Port] [User]@[SSH_Server] -p[SSH_Port]
 ```
 Example command:
 ```bash
-ssh -L 8200:localhost:8200 itzuser@149.81.41.123 -p 10022
+ssh -L 8200:localhost:8200 root@cloud.swgsupport.cz -p 20001
 ```
 3. Access the UI
 http://localhost:8200

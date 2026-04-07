@@ -19,16 +19,7 @@ vault write pki_root/root/generate/internal \
     ttl=87600h
 ```
 
-2. Generate it again but save to a file for later use:
-```bash
-vault write -format=json pki_root/root/generate/internal \
-    common_name="Lab Root CA" \
-    ttl=87600h > root_ca.json
-
-cat root_ca.json | jq -r .data.certificate > root_ca.pem
-```
-
-3. Configure the CA and CRL URLs:
+2. Configure the CA and CRL URLs:
 ```bash
 vault write pki_root/config/urls \
     issuing_certificates="http://vault.lab:8200/v1/pki_root/ca" \
@@ -54,16 +45,7 @@ vault write pki_int/intermediate/generate/internal \
     ttl=43800h
 ```
 
-4. Generate it again and save to a file:
-```bash
-vault write -format=json pki_int/intermediate/generate/internal \
-    common_name="Lab Intermediate CA" \
-    ttl=43800h > intermediate.json
-
-cat intermediate.json | jq -r .data.csr > intermediate.csr
-```
-
-5. Sign the intermediate CSR with the root CA and save to a file:
+4. Sign the intermediate CSR with the root CA and save to a file:
 ```bash
 vault write -format=json pki_root/root/sign-intermediate \
     csr=@intermediate.csr \
@@ -73,7 +55,7 @@ vault write -format=json pki_root/root/sign-intermediate \
 cat signed_intermediate.json | jq -r .data.certificate > signed_intermediate.pem
 ```
 
-7. Import the signed certificate back into the Vault Intermediate:
+5. Import the signed certificate back into the Vault Intermediate:
 ```bash
 vault write pki_int/intermediate/set-signed \
     certificate=@signed_intermediate.pem

@@ -38,12 +38,13 @@ vault secrets enable -path=pki_int pki
 vault secrets tune -max-lease-ttl=43800h pki_int
 ```
 
-3. Generate and view the intermediate CSR directly:
+3. Generate the CSR and save it to a file:
 ```bash
-vault write pki_int/intermediate/generate/internal \
+vault write -format=json pki_int/intermediate/generate/internal \
     common_name="Lab Intermediate CA" \
-    ttl=43800h
-```
+    ttl=43800h > intermediate.json
+
+cat intermediate.json | jq -r .data.csr > intermediate.csr
 
 4. Sign the intermediate CSR with the root CA and save to a file:
 ```bash

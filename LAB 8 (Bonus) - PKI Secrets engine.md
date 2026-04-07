@@ -45,6 +45,7 @@ vault write -format=json pki_int/intermediate/generate/internal \
     ttl=43800h > intermediate.json
 
 cat intermediate.json | jq -r .data.csr > intermediate.csr
+```
 
 4. Sign the intermediate CSR with the root CA and save to a file:
 ```bash
